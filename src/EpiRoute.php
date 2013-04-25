@@ -139,7 +139,16 @@ class EpiRoute
       if (!is_null($response))
       {
         $response = json_encode($response);
-        if(isset($_GET['callback'])) $response = "{$_GET['callback']}($response)";
+        if(isset($_GET['callback']))
+        {
+          $response = "{$_GET['callback']}($response)";
+        }
+        else 
+        {
+          // Set proper MIME type
+          header('Content-type: application/json');
+        }
+
         echo $response;
       }
     }
